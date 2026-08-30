@@ -1,31 +1,22 @@
-WORK FLOW - FINAL WEBSITE
-===========================
+WORK FLOW - FINAL SUPABASE REVIEW VERSION
 
 Files:
-- index.html            Main website
-- jobs.html             Job vacancies
-- reviews.html          Supabase-powered customer reviews
-- admin.html            Supabase review viewer
-- supabase-config.js    Supabase connection settings
-- logo.png              Work Flow logo
-- supabase_reviews_policies.sql  RLS helper SQL
+- index.html
+- jobs.html
+- reviews.html
+- admin.html
+- reviews.js
+- supabase-config.js
+- logo.png
+- supabase_reviews_policies.sql
+
+FLOW:
+1. Customer submits a review -> status is pending.
+2. Admin opens admin.html -> Approve or Reject.
+3. Approved reviews appear on index.html and reviews.html.
 
 IMPORTANT:
-1. Before publishing, open supabase-config.js.
-2. Put your real Supabase Project URL and Publishable/Anon key in the two values.
-3. Your Supabase table must be: public.reviews
-   Columns used:
-   idid, created_at, nameName, location, rating, review, status
-4. Reviews are inserted with status = approved so they show immediately.
-5. If INSERT/SELECT policies already exist, you can keep them. The SQL file is a helper if needed.
-
-GitHub:
-- Delete the old website files from the repository.
-- Extract this ZIP.
-- Upload ALL files from this folder to the repository root.
-- Keep the file names exactly as shown.
-- Vercel will redeploy automatically.
-
-Contact:
-WhatsApp: +971 50 246 7038
-Email: workflow2451@gmail.com
+- Keep Supabase RLS enabled.
+- The browser uses the Publishable key, not a secret key.
+- Make sure public INSERT, SELECT and (for admin actions) UPDATE policies match your intended security model.
+- Replace the files in the GitHub repository root, then wait for Vercel to redeploy.

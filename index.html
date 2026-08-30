@@ -51,6 +51,7 @@ nav{height:78px;background:#fff;display:flex;align-items:center;justify-content:
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
+<script src="reviews.js"></script>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
@@ -324,7 +325,7 @@ document.getElementById("reviewForm")?.addEventListener("submit", async (e) => {
 
     if (error) throw error;
 
-    msg.textContent = "Review submitted successfully and is now visible.";
+    msg.textContent = "Thank you! Your review has been submitted and is waiting for approval.";
     msg.style.display = "block";
     msg.style.background = "#e9f8ee";
     msg.style.color = "#126b35";
@@ -347,4 +348,12 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.setupReviewForm) window.setupReviewForm(document.getElementById("reviewForm"));
+  if (window.loadApprovedReviews) window.loadApprovedReviews("#reviewList");
+});
+</script>
+
 </body></html>
