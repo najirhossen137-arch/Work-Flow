@@ -11,4 +11,40 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 async function load(){const el=document.getElementById("list");el.innerHTML="Loading...";const {data,error}=await getSupabase().from("reviews").select("created_at,nameName,location,rating,review,status").order("created_at",{ascending:false});if(error){el.textContent=error.message;return}el.innerHTML=data.map(r=>`<div class="card"><b>${esc(r.nameName||"Anonymous")}</b> <span class="muted">${esc(r.location||"")}</span><div>${"★".repeat(Number(r.rating)||0)}</div><p>${esc(r.review||"")}</p><p class="muted">Status: ${esc(r.status||"")}</p><button class="approve" onclick="setStatus(${JSON.stringify(r.created_at)},${JSON.stringify(r.nameName||"")},"approved")">Approve</button><button class="reject" onclick="setStatus(${JSON.stringify(r.created_at)},${JSON.stringify(r.nameName||"")},"rejected")">Reject</button></div>`).join("")||"No reviews found"}
 async function setStatus(created_at,nameName,status){const {error}=await getSupabase().from("reviews").update({status}).eq("created_at",created_at).eq("nameName",nameName);if(error)alert(error.message);else load()}
 document.addEventListener("DOMContentLoaded",load)</script></head>
-<body><main><h1>Work Flow Review Admin</h1><p class="muted">Approve reviews here. Approved reviews are shown publicly.</p><div id="list"></div></main></body></html>
+<body><main><h1>Work Flow Review Admin</h1>
+<p class="muted">Sign in with a Work Flow account to manage reviews.</p>
+<div class="card" id="authBox">
+<input id="email" type="email" placeholder="Email" style="padding:10px;width:100%;box-sizing:border-box;margin:6px 0">
+<input id="password" type="password" placeholder="Password" style="padding:10px;width:100%;box-sizing:border-box;margin:6px 0">
+<button onclick="login()">Login</button> <span id="authMsg" class="muted"></span>
+</div>
+<div id="list"></div>
+<script>
+async function login(){
+  const {error}=await getSupabase().auth.signInWithPassword({
+    email:document.getElementById("email").value.trim(),
+    password:document.getElementById("password").value
+  });
+  if(error){document.getElementById("authMsg").textContent=error.message;return}
+  document.getElementById("authBox").style.display="none"; load();
+}
+async function load(){
+  const el=document.getElementById("list"); el.innerHTML="Loading...";
+  const {data,error}=await getSupabase().from("reviews")
+    .select("created_at,nameName,location,rating,review,status")
+    .order("created_at",{ascending:false});
+  if(error){el.textContent=error.message;return}
+  el.innerHTML=(data||[]).map(r=>`<div class="card">
+    <b>${esc(r.nameName||"Anonymous")}</b> <span class="muted">${esc(r.location||"")}</span>
+    <div>${"★".repeat(Number(r.rating)||0)}</div><p>${esc(r.review||"")}</p>
+    <p class="muted">Status: ${esc(r.status||"")}</p>
+    <button class="approve" onclick="setStatus(${JSON.stringify(r.created_at)},${JSON.stringify(r.nameName||"")},"approved")">Approve</button>
+    <button class="reject" onclick="setStatus(${JSON.stringify(r.created_at)},${JSON.stringify(r.nameName||"")},"rejected")">Reject</button>
+  </div>`).join("")||"No reviews found";
+}
+async function setStatus(created_at,nameName,status){
+  const {error}=await getSupabase().from("reviews").update({status})
+    .eq("created_at",created_at).eq("nameName",nameName);
+  if(error) alert(error.message); else load();
+}
+</script></main></body></html>

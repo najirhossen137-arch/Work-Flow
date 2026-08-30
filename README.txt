@@ -1,22 +1,11 @@
-WORK FLOW - FINAL SUPABASE REVIEW VERSION
+WORK FLOW - FIXED REVIEW VERSION
 
-Files:
-- index.html
-- jobs.html
-- reviews.html
-- admin.html
-- reviews.js
-- supabase-config.js
-- logo.png
-- supabase_reviews_policies.sql
+1. Replace the files in the GitHub repository root with this package.
+2. In Supabase SQL Editor, run supabase_reviews_policies.sql.
+3. Wait for Vercel to redeploy.
+4. Submit a review: it will be pending.
+5. Open /admin.html and log in with a Supabase Auth account.
+6. Approve the review, then refresh the public site.
 
-FLOW:
-1. Customer submits a review -> status is pending.
-2. Admin opens admin.html -> Approve or Reject.
-3. Approved reviews appear on index.html and reviews.html.
-
-IMPORTANT:
-- Keep Supabase RLS enabled.
-- The browser uses the Publishable key, not a secret key.
-- Make sure public INSERT, SELECT and (for admin actions) UPDATE policies match your intended security model.
-- Replace the files in the GitHub repository root, then wait for Vercel to redeploy.
+IMPORTANT: Never put a Supabase secret/service_role key in browser files.
+The included admin policy allows authenticated users to manage reviews; for production, restrict it to a dedicated admin role.
