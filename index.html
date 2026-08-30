@@ -251,7 +251,7 @@ async function loadReviews() {
     const sb = getSupabase();
     let { data, error } = await sb
       .from("reviews")
-      .select("idid, created_at, nameName, location, rating, review, status")
+      .select("created_at, nameName, location, rating, review, status")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
 
@@ -261,7 +261,7 @@ async function loadReviews() {
     if (!data || data.length === 0) {
       const fallback = await sb
         .from("reviews")
-        .select("idid, created_at, nameName, location, rating, review, status")
+        .select("created_at, nameName, location, rating, review, status")
         .order("created_at", { ascending: false });
       if (fallback.error) throw fallback.error;
       data = fallback.data || [];

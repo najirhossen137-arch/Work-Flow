@@ -17,7 +17,7 @@
   async function fetchApprovedReviews() {
     const sb = client();
     const result = await sb.from("reviews")
-      .select("idid,created_at,nameName,location,rating,review,status")
+      .select("created_at,nameName,location,rating,review,status")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
     if (result.error) throw result.error;
