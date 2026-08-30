@@ -87,6 +87,21 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="reviews.js"></script>
+<script>
+async function requireSignupForApply(job){
+  try{
+    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);
+    const {data}=await client.auth.getSession();
+    if(data.session){
+      location.href='apply.html?job='+encodeURIComponent(job);
+    }else{
+      location.href='signup.html?next='+encodeURIComponent('apply.html?job='+job);
+    }
+  }catch(e){
+    location.href='signup.html?next='+encodeURIComponent('apply.html?job='+job);
+  }
+}
+</script>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
@@ -113,9 +128,9 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 
 <section id="jobs" class="section"><h2>LATEST <span style="color:var(--teal)">JOB VACANCIES</span></h2><p class="sub">Explore current opportunities in the UAE. Contact us to confirm availability and requirements.</p>
 <div class="jobs-wrap"><div class="jobs">
-<div class="job"><div><h3>Multilingual Customer Support Executive</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 4,000–6,000</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Customer%20Support%20Executive" target="_blank">Apply Now</a></div>
-<div class="job"><div><h3>Facility Management Coordinator</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 5,000–7,000</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Facility%20Management%20Coordinator" target="_blank">Apply Now</a></div>
-<div class="job"><div><h3>Sales Associate</h3><div class="tags"><span>UAE</span><span class="tag">Full Time</span><span>AED 3,000–4,500</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Sales%20Associate" target="_blank">Apply Now</a></div>
+<div class="job"><div><h3>Multilingual Customer Support Executive</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 4,000–6,000</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Multilingual Customer Support Executive')">Apply Now</button></div>
+<div class="job"><div><h3>Facility Management Coordinator</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 5,000–7,000</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Facility Management Coordinator')">Apply Now</button></div>
+<div class="job"><div><h3>Sales Associate</h3><div class="tags"><span>UAE</span><span class="tag">Full Time</span><span>AED 3,000–4,500</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Sales Associate')">Apply Now</button></div>
 </div>
 <aside class="side"><h3>Looking for a Job in <span style="color:#17c5d2">UAE?</span></h3><ul><li>100% Free Job Search</li><li>Trusted Recruitment Support</li><li>Top Companies Hiring</li><li>Quick & Easy Application</li></ul><a class="btn" href="#cv">Submit Your CV</a><p>Or chat on WhatsApp</p><a class="btn outline" href="https://wa.me/971502467038" target="_blank">+971 50 246 7038</a></aside></div></section>
 
