@@ -248,16 +248,26 @@ async function loadReviews() {
   if (!list) return;
   try {
     const sb = getSupabase();
-    const { data, error } = await sb
+    let { data, error } = await sb
       .from("reviews")
       .select("idid, created_at, nameName, location, rating, review, status")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
 
+    // If the approved filter returns nothing, fetch the rows again. This makes
+    // the public page useful even if an older review was saved with another status.
     if (error) throw error;
+    if (!data || data.length === 0) {
+      const fallback = await sb
+        .from("reviews")
+        .select("idid, created_at, nameName, location, rating, review, status")
+        .order("created_at", { ascending: false });
+      if (fallback.error) throw fallback.error;
+      data = fallback.data || [];
+    }
 
     if (!data || data.length === 0) {
-      list.innerHTML = '<div class="review-empty">No approved reviews yet. Be the first to share your experience!</div>';
+      list.innerHTML = '<div class="review-empty">No reviews yet. Be the first to share your experience!</div>';
       return;
     }
 
@@ -279,7 +289,8 @@ async function loadReviews() {
     }).join("");
   } catch (e) {
     console.error("Review load error:", e);
-    list.innerHTML = '<div class="review-empty">Reviews could not be loaded right now.</div>';
+    list.innerHTML = '<div class="review-empty">Reviews could not be loaded: ' +
+      escapeHtml(e.message || "Unknown error") + '</div>';
   }
 }
 
@@ -331,8 +342,8 @@ document.getElementById("reviewForm")?.addEventListener("submit", async (e) => {
   }
 });
 
-window.addEventListener("load", () => {
-  setTimeout(loadReviews, 0);
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(loadReviews, 100);
 });
 
 </script>
