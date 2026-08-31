@@ -18,14 +18,14 @@
         if (login) login.style.display = 'none';
         if (signup) signup.style.display = 'none';
         if (userEl) {
-          userEl.textContent = '👤 ' + (user.user_metadata?.full_name || user.email || 'Account');
+          userEl.textContent = '👤 ' + (user.user_metadata?.full_name || 'Account');
           userEl.style.display = 'inline-flex';
           userEl.style.maxWidth = '180px';
           userEl.style.overflow = 'hidden';
           userEl.style.textOverflow = 'ellipsis';
           userEl.style.whiteSpace = 'nowrap';
           userEl.style.cursor = 'pointer';
-          userEl.title = 'Open Candidate Dashboard';
+          userEl.title = 'Account: ' + (user.email || '') + ' — Open Candidate Dashboard';
           userEl.onclick = () => { location.href = 'dashboard.html'; };
         }
         if (dashboard) dashboard.style.display = 'inline-flex';
