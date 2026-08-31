@@ -161,4 +161,172 @@ document.addEventListener("DOMContentLoaded", function () {
     window.loadApprovedReviews("#reviewList");
   }
 });
+</script><script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+  const sb = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+
+  const { data } = await sb.auth.getSession();
+
+  if (data.session) {
+
+    // Login hide
+    if (loginBtn) {
+      loginBtn.style.display = "none";
+    }
+
+    // Sign Up hide
+    if (signupBtn) {
+      signupBtn.style.display = "none";
+    }
+
+    // Profile button
+    if (!document.getElementById("profileBtn")) {
+
+      const profileBtn = document.createElement("a");
+
+      profileBtn.id = "profileBtn";
+      profileBtn.className = "btn outline-dark";
+      profileBtn.href = "profile.html";
+      profileBtn.innerHTML = "👤 Profile";
+
+      const authNav = document.querySelector(".auth-nav");
+
+      if (authNav) {
+        authNav.insertBefore(profileBtn, authNav.firstChild);
+      }
+    }
+
+  } else {
+
+    // Logged out
+    if (loginBtn) {
+      loginBtn.style.display = "inline-flex";
+    }
+
+    if (signupBtn) {
+      signupBtn.style.display = "inline-flex";
+    }
+
+  }
+
+});
+</script><script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+  const sb = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+
+  const { data } = await sb.auth.getSession();
+
+  if (data.session) {
+
+    // Login hide
+    if (loginBtn) {
+      loginBtn.style.display = "none";
+    }
+
+    // Sign Up hide
+    if (signupBtn) {
+      signupBtn.style.display = "none";
+    }
+
+    // Profile button
+    if (!document.getElementById("profileBtn")) {
+
+      const profileBtn = document.createElement("a");
+
+      profileBtn.id = "profileBtn";
+      profileBtn.className = "btn outline-dark";
+      profileBtn.href = "profile.html";
+      profileBtn.innerHTML = "👤 Profile";
+
+      const authNav = document.querySelector(".auth-nav");
+
+      if (authNav) {
+        authNav.insertBefore(profileBtn, authNav.firstChild);
+      }
+    }
+
+  } else {
+
+    // Logged out
+    if (loginBtn) {
+      loginBtn.style.display = "inline-flex";
+    }
+
+    if (signupBtn) {
+      signupBtn.style.display = "inline-flex";
+    }
+
+  }
+
+});
+</script><script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+  const sb = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+
+  const { data } = await sb.auth.getSession();
+
+  if (data.session) {
+
+    // Login hide
+    if (loginBtn) {
+      loginBtn.style.display = "none";
+    }
+
+    // Sign Up hide
+    if (signupBtn) {
+      signupBtn.style.display = "none";
+    }
+
+    // Profile button
+    if (!document.getElementById("profileBtn")) {
+
+      const profileBtn = document.createElement("a");
+
+      profileBtn.id = "profileBtn";
+      profileBtn.className = "btn outline-dark";
+      profileBtn.href = "profile.html";
+      profileBtn.innerHTML = "👤 Profile";
+
+      const authNav = document.querySelector(".auth-nav");
+
+      if (authNav) {
+        authNav.insertBefore(profileBtn, authNav.firstChild);
+      }
+    }
+
+  } else {
+
+    // Logged out
+    if (loginBtn) {
+      loginBtn.style.display = "inline-flex";
+    }
+
+    if (signupBtn) {
+      signupBtn.style.display = "inline-flex";
+    }
+
+  }
+
+});
 </script></body></html>
