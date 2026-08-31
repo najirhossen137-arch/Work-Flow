@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Profile | Work Flow</title>
+<link rel="icon" href="logo.png">
+<style>
+:root{--navy:#061b38;--teal:#10b7c7;--bg:#f4f8fb;--muted:#66758a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#10213a}
+header{background:#fff;height:72px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 15px #0001;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:var(--navy)}
+.brand img{width:45px;height:45px;object-fit:contain}.brand b{font-size:20px}.brand span{color:var(--teal)}
+.nav-actions{display:flex;gap:8px}
+.btn{border:0;border-radius:8px;padding:11px 17px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.home{background:#fff;color:var(--navy);border:1px solid #ccd6e2}.logout{background:var(--navy);color:#fff}
+main{max-width:900px;margin:45px auto;padding:0 18px}
+.profile-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 10px 35px #10213a12}
+.profile-head{display:flex;align-items:center;gap:18px;border-bottom:1px solid #e5ebf1;padding-bottom:25px;margin-bottom:25px}
+.avatar{width:78px;height:78px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:32px;font-weight:900}
+.profile-head h1{margin:0 0 4px;font-size:28px}.profile-head p{margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.item{border:1px solid #e1e8ef;border-radius:12px;padding:17px}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:800;margin-bottom:6px}
+.value{font-size:16px;font-weight:700;word-break:break-word}
+.section-title{margin:30px 0 12px;font-size:19px;color:var(--navy)}
+.note{background:#eef8fa;border-radius:12px;padding:15px;color:#38536b}
+.danger{margin-top:25px;text-align:center}.danger button{background:#d92d20;color:#fff;border:0;border-radius:8px;padding:12px 22px;font-weight:800;cursor:pointer}
+#loading{text-align:center;padding:60px;color:var(--muted)}
+#error{display:none;background:#fff0f0;color:#a31d1d;padding:15px;border-radius:10px}
+@media(max-width:600px){
+header{padding:0 12px}.brand b{font-size:17px}.nav-actions .home{display:none}
+main{margin:25px auto}.profile-card{padding:22px}.grid{grid-template-columns:1fr}.profile-head h1{font-size:23px}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+<body>
+<header>
+<a class="brand" href="index.html"><img src="logo.png" alt="Work Flow logo"><b>WORK <span>FLOW</span></b></a>
+<div class="nav-actions">
+<a class="btn home" href="index.html">🏠 Home</a>
+<button class="btn logout" id="logoutBtn" type="button">🚪 Logout</button>
+</div>
+</header>
+
+<main>
+<div id="loading">Loading your profile...</div>
+<div id="error"></div>
+
+<section class="profile-card" id="profileCard" style="display:none">
+<div class="profile-head">
+<div class="avatar" id="avatar">U</div>
+<div><h1 id="profileName">User</h1><p>Work Flow Member</p></div>
+</div>
+
+<h2 class="section-title">Account Details</h2>
+<div class="grid">
+<div class="item"><div class="label">Full Name</div><div class="value" id="name">—</div></div>
+<div class="item"><div class="label">Email Address</div><div class="value" id="email">—</div></div>
+<div class="item"><div class="label">Account ID</div><div class="value" id="userId">—</div></div>
+<div class="item"><div class="label">Member Since</div><div class="value" id="created">—</div></div>
+</div>
+
+<h2 class="section-title">Profile Information</h2>
+<div class="note">Your account is securely managed through Work Flow and Supabase Authentication.</div>
+
+<div class="danger">
+<button id="logoutBtn2" type="button">🚪 Logout from Account</button>
+</div>
+</section>
+</main>
+
+<script>
+const client=()=>window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);
+
+async function init(){
+ try{
+  const sb=client();
+  const {data,error}=await sb.auth.getUser();
+  if(error||!data.user){
+    location.replace('login.html?next=profile.html');
+    return;
+  }
+
+  const u=data.user;
+  const name=u.user_metadata?.full_name||u.user_metadata?.name||'Work Flow Member';
+
+  document.getElementById('profileName').textContent=name;
+  document.getElementById('name').textContent=name;
+  document.getElementById('email').textContent=u.email||'—';
+  document.getElementById('userId').textContent=u.id||'—';
+  document.getElementById('created').textContent=u.created_at?new Date(u.created_at).toLocaleDateString():'—';
+  document.getElementById('avatar').textContent=name.trim().charAt(0).toUpperCase()||'U';
+
+  document.getElementById('loading').style.display='none';
+  document.getElementById('profileCard').style.display='block';
+ }catch(e){
+  document.getElementById('loading').style.display='none';
+  const el=document.getElementById('error');
+  el.textContent='Could not load profile: '+(e.message||'Unknown error');
+  el.style.display='block';
+ }
+}
+
+async function logout(){
+ try{
+  await client().auth.signOut();
+  location.replace('index.html');
+ }catch(e){
+  alert(e.message||'Logout failed');
+ }
+}
+
+document.getElementById('logoutBtn').onclick=logout;
+document.getElementById('logoutBtn2').onclick=logout;
+init();
+</script>
+</body>
+</html>
