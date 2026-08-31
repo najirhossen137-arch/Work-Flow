@@ -132,6 +132,26 @@ nav{height:76px;padding:0 clamp(16px,5vw,72px);box-shadow:0 5px 24px rgba(7,26,5
  .top{font-size:10px;padding:8px 12px}.top span:last-child{max-width:140px}.brand{max-width:145px}.brand img{width:40px;height:40px}.brand b{font-size:17px}.auth-nav .auth-user{display:none!important}.auth-nav .btn{font-size:10px;padding:9px 10px;min-height:38px}.auth-nav .btn.outline-dark{width:auto}.auth-nav .btn.dark{width:42px;font-size:0}.auth-nav .btn.dark:before{content:"•••";font-size:17px;letter-spacing:2px}.wf-menu-toggle{width:38px;height:38px}.hero{min-height:690px;padding:55px 18px 50px}.hero h1{font-size:47px;line-height:.96;margin-bottom:18px}.hero p{font-size:15px;line-height:1.7}.actions{gap:10px}.actions .btn{width:100%;min-height:48px}.stats{grid-template-columns:1fr 1fr}.stat{padding:15px 12px}.stat strong{font-size:22px}.stat small{font-size:10px}.section{padding:58px 18px}.section h2{font-size:27px}.category-grid,.location-grid{grid-template-columns:1fr 1fr;gap:10px}.category-card{min-height:108px;padding:13px}.category-icon{width:38px;height:38px;flex-basis:38px}.category-card h3{font-size:12px}.category-card p{font-size:9px}.category-arrow{display:none}.location-card{padding:12px}.location-card>span{width:36px;height:36px}.location-card strong{font-size:12px}.location-card small{font-size:9px}.features{grid-template-columns:1fr 1fr}.feature{padding:20px 10px}.feature b{font-size:12px}.feature p{font-size:10px}.jobs-wrap{grid-template-columns:1fr}.job{padding:18px}.job .btn{width:100%}.footer-grid{grid-template-columns:1fr 1fr;gap:25px}.footer-grid>div:first-child{grid-column:1/-1}.contact h2{font-size:30px}
 }
 </style>
+
+<style>
+/* V4 MOBILE WIDTH + MENU HOTFIX */
+html,body{width:100%;min-width:100%;max-width:none;overflow-x:hidden}
+body>*{max-width:none}
+.top,nav,.hero,.section,.contact,.footer{width:100%;box-sizing:border-box}
+@media(max-width:900px){
+  nav{position:sticky;top:0;width:100%;}
+  .wf-mobile-menu{grid-template-columns:1fr!important;right:12px!important;left:12px!important;width:auto!important}
+  .wf-mobile-menu.open{display:grid!important}
+  .wf-mobile-menu a{display:block;width:100%;}
+}
+@media(max-width:520px){
+  .brand{max-width:170px!important;flex:1 1 auto!important}
+  .brand b{font-size:17px!important}
+  .auth-nav{flex-shrink:0!important}
+  .auth-nav .btn.outline-dark{width:58px!important}
+  .auth-nav .btn.dark{width:38px!important}
+}
+</style>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
