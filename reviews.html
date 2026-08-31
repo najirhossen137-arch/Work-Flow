@@ -36,8 +36,8 @@ function getSupabase(){
 <h1>CUSTOMER <span class="teal">REVIEWS</span></h1>
 <div class="review-form-box">
 <h2>Write a Review</h2>
-<p>Your review will stay pending until it is approved by Work Flow.</p>
-<form id="reviewForm">
+<p>Your review will stay pending until it is approved by Work Flow.</p><div id="authNotice" style="background:#eef8fa;border:1px solid #cdebef;padding:12px;border-radius:8px;margin:12px 0;display:none">🔐 Please <a href="login.html?next=reviews.html" style="color:#078a97;font-weight:700">Log in</a> or <a href="signup.html?next=reviews.html" style="color:#078a97;font-weight:700">Sign Up</a> to submit a review.</div>
+<form id="reviewForm" style="display:none">
 <input id="reviewName" name="name" required placeholder="Your Name">
 <input id="reviewLocation" name="location" placeholder="City / Country (optional)">
 <select id="reviewRating" name="rating" required>
@@ -51,9 +51,15 @@ function getSupabase(){
 <div id="reviewList" class="review-list"><div class="review-empty">Loading reviews...</div></div>
 </main>
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-  setupReviewForm(document.getElementById("reviewForm"));
+document.addEventListener("DOMContentLoaded",async function(){
   loadApprovedReviews("#reviewList");
+  try{
+    const client=getSupabase();
+    const {data}=await client.auth.getSession();
+    const form=document.getElementById("reviewForm"), notice=document.getElementById("authNotice");
+    if(data.session){ form.style.display="grid"; setupReviewForm(form); }
+    else { notice.style.display="block"; }
+  }catch(e){ document.getElementById("authNotice").style.display="block"; }
 });
 </script>
 </body>

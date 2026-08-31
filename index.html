@@ -6,15 +6,36 @@
 <title>Work Flow | Recruitment & Business Services</title>
 <meta name="description" content="Work Flow connects job seekers with UAE opportunities and helps employers find the right talent.">
 <link rel="icon" href="logo.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>body.auth-check{visibility:hidden}</style>
+<script>
+(async function(){
+  document.documentElement.classList.add('auth-checking');
+  document.body.classList.add('auth-check');
+  try {
+    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    const { data } = await client.auth.getSession();
+    if (!data.session) {
+      window.location.replace('login.html');
+      return;
+    }
+  } catch (e) {
+    window.location.replace('login.html');
+    return;
+  }
+  document.body.classList.remove('auth-check');
+})();
+</script>
 <style>
 :root{--navy:#061b38;--blue:#0b315c;--teal:#10b7c7;--ink:#10213a;--muted:#66758a;--bg:#f6f9fc;--white:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
 a{text-decoration:none;color:inherit}.top{background:var(--navy);color:#fff;padding:9px 5%;font-size:13px;display:flex;justify-content:space-between;gap:20px}
-nav{height:78px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:20;box-shadow:0 2px 15px #0001}.brand{display:flex;align-items:center;gap:12px;font-weight:800}.brand img{width:58px;height:58px;object-fit:contain}.brand b{font-size:24px}.brand span{color:var(--teal)}.links{display:flex;gap:24px;font-size:14px;font-weight:700}.links a:hover{color:var(--teal)}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 21px;border-radius:7px;background:var(--teal);color:#fff;font-weight:800;border:0;cursor:pointer}.btn.dark{background:var(--navy)}.btn.outline{background:transparent;border:1px solid #fff}.hero{min-height:570px;background:linear-gradient(90deg,#03152eea 0%,#061b38c9 45%,#061b3820 100%),url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=85') center/cover;display:flex;align-items:center;padding:70px 5%;color:#fff}.hero-inner{max-width:720px}.eyebrow{color:#25d3df;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(42px,6vw,76px);line-height:.98;margin:15px 0}.hero h1 span{color:#16c2d0}.hero p{font-size:19px;max-width:600px;color:#e6eef7}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.stats{margin-top:45px;display:flex;flex-wrap:wrap;background:#062143eF;border:1px solid #ffffff22;border-radius:15px;overflow:hidden}.stat{padding:18px 26px;min-width:170px;border-right:1px solid #ffffff22}.stat strong{display:block;color:#17c5d2;font-size:27px}.stat small{color:#d9e5f2}.section{padding:70px 5%;max-width:1250px;margin:auto}.section h2{font-size:34px;margin:0 0 10px}.sub{color:var(--muted);margin-bottom:35px}.features{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#dfe6ee}.feature{background:#fff;padding:28px 18px;text-align:center}.icon{font-size:34px;color:var(--teal)}.jobs-wrap{display:grid;grid-template-columns:2fr 1fr;gap:25px}.jobs{display:grid;gap:14px}.job{background:#fff;border:1px solid #e3eaf2;border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.job h3{margin:0 0 5px}.tags{display:flex;gap:8px;flex-wrap:wrap;color:#5b6c80;font-size:13px}.tag{background:#edf8f9;color:#078a97;padding:4px 9px;border-radius:20px}.side{background:linear-gradient(145deg,#061b38,#0c3a68);color:#fff;border-radius:16px;padding:35px}.side h3{font-size:30px;margin-top:0}.side li{margin:12px 0}.about{background:#fff;border-radius:18px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about img{width:100%;border-radius:14px}.contact{background:var(--navy);color:#fff;padding:60px 5%;text-align:center}.contact h2{font-size:40px;margin:0 0 10px}.contact p{color:#ccd8e6}.footer{background:#031329;color:#cbd8e7;padding:45px 5% 20px}.footer-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:35px}.footer h3{color:#fff}.footer a{display:block;margin:8px 0}.copy{text-align:center;border-top:1px solid #ffffff18;margin-top:35px;padding-top:18px;font-size:13px}.wa{position:fixed;right:22px;bottom:22px;background:#20c66a;color:#fff;border-radius:50%;width:58px;height:58px;display:grid;place-items:center;font-size:28px;box-shadow:0 8px 25px #0004;z-index:30}
+nav{height:78px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:20;box-shadow:0 2px 15px #0001}.brand{display:flex;align-items:center;gap:12px;font-weight:800}.brand img{width:58px;height:58px;object-fit:contain}.brand b{font-size:24px;white-space:nowrap}.brand span{color:var(--teal)}.brand-copy{min-width:0}.brand-copy small{display:block;font-size:10px;letter-spacing:.5px;white-space:nowrap}.links{display:flex;gap:24px;font-size:14px;font-weight:700}.links a:hover{color:var(--teal)}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 21px;border-radius:7px;background:var(--teal);color:#fff;font-weight:800;border:0;cursor:pointer}.btn.dark{background:var(--navy)}.btn.outline{background:transparent;border:1px solid #fff}.hero{min-height:570px;background:linear-gradient(90deg,#03152eea 0%,#061b38c9 45%,#061b3820 100%),url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=85') center/cover;display:flex;align-items:center;padding:70px 5%;color:#fff}.hero-inner{max-width:720px}.eyebrow{color:#25d3df;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(42px,6vw,76px);line-height:.98;margin:15px 0}.hero h1 span{color:#16c2d0}.hero p{font-size:19px;max-width:600px;color:#e6eef7}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.stats{margin-top:45px;display:flex;flex-wrap:wrap;background:#062143eF;border:1px solid #ffffff22;border-radius:15px;overflow:hidden}.stat{padding:18px 26px;min-width:170px;border-right:1px solid #ffffff22}.stat strong{display:block;color:#17c5d2;font-size:27px}.stat small{color:#d9e5f2}.section{padding:70px 5%;max-width:1250px;margin:auto}.section h2{font-size:34px;margin:0 0 10px}.sub{color:var(--muted);margin-bottom:35px}.features{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#dfe6ee}.feature{background:#fff;padding:28px 18px;text-align:center}.icon{font-size:34px;color:var(--teal)}.jobs-wrap{display:grid;grid-template-columns:2fr 1fr;gap:25px}.jobs{display:grid;gap:14px}.job{background:#fff;border:1px solid #e3eaf2;border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.job h3{margin:0 0 5px}.tags{display:flex;gap:8px;flex-wrap:wrap;color:#5b6c80;font-size:13px}.tag{background:#edf8f9;color:#078a97;padding:4px 9px;border-radius:20px}.side{background:linear-gradient(145deg,#061b38,#0c3a68);color:#fff;border-radius:16px;padding:35px}.side h3{font-size:30px;margin-top:0}.side li{margin:12px 0}.about{background:#fff;border-radius:18px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about img{width:100%;border-radius:14px}.contact{background:var(--navy);color:#fff;padding:60px 5%;text-align:center}.contact h2{font-size:40px;margin:0 0 10px}.contact p{color:#ccd8e6}.footer{background:#031329;color:#cbd8e7;padding:45px 5% 20px}.footer-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:35px}.footer h3{color:#fff}.footer a{display:block;margin:8px 0}.copy{text-align:center;border-top:1px solid #ffffff18;margin-top:35px;padding-top:18px;font-size:13px}.wa{position:fixed;right:22px;bottom:22px;background:#20c66a;color:#fff;border-radius:50%;width:58px;height:58px;display:grid;place-items:center;font-size:28px;box-shadow:0 8px 25px #0004;z-index:30}
 @media(max-width:900px){
 .links{display:none}
 nav{height:72px;padding:0 14px;gap:10px}
-.brand{min-width:0;gap:7px}.brand img{width:44px;height:44px}.brand b{font-size:18px}.brand small{font-size:8px!important;line-height:1.1;max-width:125px}
+.brand{min-width:0;gap:7px;flex:0 1 auto}.brand img{width:44px;height:40px;object-fit:cover;border-radius:0}.brand b{font-size:18px}.brand-copy small{font-size:8px;line-height:1.1}
 .auth-nav{margin-left:auto;display:flex!important;gap:6px;flex-shrink:0}
 .auth-nav .btn{padding:9px 11px;border-radius:8px;font-size:12px;white-space:nowrap}
 .auth-nav .btn.dark{font-size:0;width:42px;height:38px;padding:0}.auth-nav .btn.dark::before{content:"💬";font-size:18px}
@@ -22,8 +43,8 @@ nav{height:72px;padding:0 14px;gap:10px}
 }
 @media(max-width:520px){
 .top{font-size:10px;padding:7px 12px}.top span:last-child{max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-size:17px}.brand small{display:none!important}
-.auth-nav{gap:5px}.auth-nav .btn{padding:8px 9px;font-size:11px}.auth-nav .btn.dark{width:38px;height:36px}
+nav{height:66px;padding:0 10px}.brand img{width:40px;height:38px}.brand b{font-size:17px}.brand-copy small{display:none!important}
+.auth-nav{gap:5px}.auth-nav .btn{height:38px;padding:8px 10px;font-size:11px;line-height:1;white-space:nowrap;min-width:0}.auth-nav .btn.outline-dark{width:62px}.auth-nav .btn:not(.outline-dark):not(.dark){width:68px}.auth-nav .btn.dark{width:38px;height:38px}
 .hero{padding:55px 5%}.hero h1{font-size:46px}.section{padding:50px 5%}.features{grid-template-columns:1fr}.stats{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:0;border-bottom:1px solid #ffffff22}
 }
 
@@ -41,6 +62,7 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 .auth-msg{margin-top:15px;padding:10px;border-radius:8px;display:none}
 .auth-user{font-size:13px;color:var(--navy);font-weight:700;display:none}
 @media(max-width:900px){nav>div:last-child{display:flex!important}.links{display:none}}
+@media(max-width:430px){nav{padding:0 8px}.brand{gap:5px;max-width:125px;overflow:hidden}.brand img{width:38px;height:36px}.brand b{font-size:16px}.brand-copy{overflow:hidden}.brand-copy b{display:block}.auth-nav{gap:4px}.auth-nav .btn{font-size:10px;padding:8px 7px}.auth-nav .btn.outline-dark{width:58px}.auth-nav .btn:not(.outline-dark):not(.dark){width:62px}.auth-nav .btn.dark{width:36px;height:38px}}
 
 .reviews-section{background:#eef6fa}
 .review-box{background:#fff;border:1px solid #e1e8ef;border-radius:16px;padding:28px;max-width:760px;margin:0 auto 30px}
@@ -65,11 +87,22 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="reviews.js"></script>
+<script>
+async function requireSignupForApply(job){
+  const next='apply.html?job='+encodeURIComponent(job);
+  try{
+    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);
+    const {data}=await client.auth.getSession();
+    if(data && data.session){ location.href=next; return; }
+  }catch(e){}
+  location.href='login.html?next='+encodeURIComponent(next);
+}
+</script>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
 <nav>
-<a class="brand" href="#"><img src="logo.png" alt="Work Flow logo"><div><b>WORK <span>FLOW</span></b><small style="display:block;font-size:10px;letter-spacing:.5px">RECRUITMENT & BUSINESS SERVICES</small></div></a>
+<a class="brand" href="#home"><img src="logo.png" alt="Work Flow logo"><div class="brand-copy"><b>WORK <span>FLOW</span></b><small>RECRUITMENT &amp; BUSINESS SERVICES</small></div></a>
 <div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#jobs">Jobs</a><a href="#employers">Employers</a><a href="#cv">Submit CV</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
 <div class="auth-nav">
 <a class="btn outline-dark" id="loginBtn" href="login.html">🔐 Login</a>
@@ -91,9 +124,9 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 
 <section id="jobs" class="section"><h2>LATEST <span style="color:var(--teal)">JOB VACANCIES</span></h2><p class="sub">Explore current opportunities in the UAE. Contact us to confirm availability and requirements.</p>
 <div class="jobs-wrap"><div class="jobs">
-<div class="job"><div><h3>Multilingual Customer Support Executive</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 4,000–6,000</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Customer%20Support%20Executive" target="_blank">Apply Now</a></div>
-<div class="job"><div><h3>Facility Management Coordinator</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 5,000–7,000</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Facility%20Management%20Coordinator" target="_blank">Apply Now</a></div>
-<div class="job"><div><h3>Sales Associate</h3><div class="tags"><span>UAE</span><span class="tag">Full Time</span><span>AED 3,000–4,500</span></div></div><a class="btn dark" href="https://wa.me/971502467038?text=I%20want%20to%20apply%20for%20Sales%20Associate" target="_blank">Apply Now</a></div>
+<div class="job"><div><h3>Multilingual Customer Support Executive</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 4,000–6,000</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Multilingual Customer Support Executive')">Apply Now</button></div>
+<div class="job"><div><h3>Facility Management Coordinator</h3><div class="tags"><span>Dubai, UAE</span><span class="tag">Full Time</span><span>AED 5,000–7,000</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Facility Management Coordinator')">Apply Now</button></div>
+<div class="job"><div><h3>Sales Associate</h3><div class="tags"><span>UAE</span><span class="tag">Full Time</span><span>AED 3,000–4,500</span></div></div><button class="btn dark" type="button" onclick="requireSignupForApply('Sales Associate')">Apply Now</button></div>
 </div>
 <aside class="side"><h3>Looking for a Job in <span style="color:#17c5d2">UAE?</span></h3><ul><li>100% Free Job Search</li><li>Trusted Recruitment Support</li><li>Top Companies Hiring</li><li>Quick & Easy Application</li></ul><a class="btn" href="#cv">Submit Your CV</a><p>Or chat on WhatsApp</p><a class="btn outline" href="https://wa.me/971502467038" target="_blank">+971 50 246 7038</a></aside></div></section>
 
@@ -151,182 +184,4 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.setupReviewForm) {
-    window.setupReviewForm(document.getElementById("reviewForm"));
-  }
-
-  if (window.loadApprovedReviews) {
-    window.loadApprovedReviews("#reviewList");
-  }
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", async function () {
-
-  const sb = window.supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
-
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-
-  const { data } = await sb.auth.getSession();
-
-  if (data.session) {
-
-    // Login hide
-    if (loginBtn) {
-      loginBtn.style.display = "none";
-    }
-
-    // Sign Up hide
-    if (signupBtn) {
-      signupBtn.style.display = "none";
-    }
-
-    // Profile button
-    if (!document.getElementById("profileBtn")) {
-
-      const profileBtn = document.createElement("a");
-
-      profileBtn.id = "profileBtn";
-      profileBtn.className = "btn outline-dark";
-      profileBtn.href = "profile.html";
-      profileBtn.innerHTML = "👤 Profile";
-
-      const authNav = document.querySelector(".auth-nav");
-
-      if (authNav) {
-        authNav.insertBefore(profileBtn, authNav.firstChild);
-      }
-    }
-
-  } else {
-
-    // Logged out
-    if (loginBtn) {
-      loginBtn.style.display = "inline-flex";
-    }
-
-    if (signupBtn) {
-      signupBtn.style.display = "inline-flex";
-    }
-
-  }
-
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", async function () {
-
-  const sb = window.supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
-
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-
-  const { data } = await sb.auth.getSession();
-
-  if (data.session) {
-
-    // Login hide
-    if (loginBtn) {
-      loginBtn.style.display = "none";
-    }
-
-    // Sign Up hide
-    if (signupBtn) {
-      signupBtn.style.display = "none";
-    }
-
-    // Profile button
-    if (!document.getElementById("profileBtn")) {
-
-      const profileBtn = document.createElement("a");
-
-      profileBtn.id = "profileBtn";
-      profileBtn.className = "btn outline-dark";
-      profileBtn.href = "profile.html";
-      profileBtn.innerHTML = "👤 Profile";
-
-      const authNav = document.querySelector(".auth-nav");
-
-      if (authNav) {
-        authNav.insertBefore(profileBtn, authNav.firstChild);
-      }
-    }
-
-  } else {
-
-    // Logged out
-    if (loginBtn) {
-      loginBtn.style.display = "inline-flex";
-    }
-
-    if (signupBtn) {
-      signupBtn.style.display = "inline-flex";
-    }
-
-  }
-
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", async function () {
-
-  const sb = window.supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
-
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-
-  const { data } = await sb.auth.getSession();
-
-  if (data.session) {
-
-    // Login hide
-    if (loginBtn) {
-      loginBtn.style.display = "none";
-    }
-
-    // Sign Up hide
-    if (signupBtn) {
-      signupBtn.style.display = "none";
-    }
-
-    // Profile button
-    if (!document.getElementById("profileBtn")) {
-
-      const profileBtn = document.createElement("a");
-
-      profileBtn.id = "profileBtn";
-      profileBtn.className = "btn outline-dark";
-      profileBtn.href = "profile.html";
-      profileBtn.innerHTML = "👤 Profile";
-
-      const authNav = document.querySelector(".auth-nav");
-
-      if (authNav) {
-        authNav.insertBefore(profileBtn, authNav.firstChild);
-      }
-    }
-
-  } else {
-
-    // Logged out
-    if (loginBtn) {
-      loginBtn.style.display = "inline-flex";
-    }
-
-    if (signupBtn) {
-      signupBtn.style.display = "inline-flex";
-    }
-
-  }
-
-});
-</script></body></html>
+</body></html>
