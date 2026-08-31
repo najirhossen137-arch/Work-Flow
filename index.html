@@ -8,25 +8,7 @@
 <link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script><script src="auth-ui.js"></script>
-<style>body.auth-check{visibility:hidden}</style>
-<script>
-(async function(){
-  document.documentElement.classList.add('auth-checking');
-  document.body.classList.add('auth-check');
-  try {
-    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-    const { data } = await client.auth.getSession();
-    if (!data.session) {
-      window.location.replace('login.html');
-      return;
-    }
-  } catch (e) {
-    window.location.replace('login.html');
-    return;
-  }
-  document.body.classList.remove('auth-check');
-})();
-</script>
+
 <style>
 :root{--navy:#061b38;--blue:#0b315c;--teal:#10b7c7;--ink:#10213a;--muted:#66758a;--bg:#f6f9fc;--white:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
@@ -98,9 +80,7 @@ async function requireSignupForApply(job){
   location.href='login.html?next='+encodeURIComponent(next);
 }
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', async()=>{try{const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);const {data}=await client.auth.getSession();const user=data?.session?.user;const login=document.getElementById('loginBtn'),signup=document.getElementById('signupBtn'),u=document.getElementById('authUser'),logout=document.getElementById('logoutBtn');if(!login||!signup||!u||!logout)return;if(user){login.style.display='none';signup.style.display='none';u.textContent='👤 '+(user.user_metadata?.full_name||user.email||'Account');u.style.display='inline-flex';logout.style.display='inline-flex';logout.onclick=async()=>{await client.auth.signOut();location.href='index.html';};}else{login.style.display='inline-flex';signup.style.display='inline-flex';u.style.display='none';logout.style.display='none';}}catch(e){console.warn('Auth UI error',e)}});
-</script></head>
+</head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
 <nav>
@@ -110,6 +90,7 @@ document.addEventListener('DOMContentLoaded', async()=>{try{const client=window.
 <a class="btn outline-dark" id="loginBtn" href="login.html">🔐 Login</a>
 <a class="btn" id="signupBtn" href="signup.html">✨ Sign Up</a>
 <span class="auth-user" id="authUser"></span>
+<a class="btn outline-dark" id="dashboardBtn" href="dashboard.html" style="display:none">👤 Dashboard</a>
 <button class="btn outline-dark" id="logoutBtn" type="button" style="display:none">🚪 Logout</button>
 <a class="btn dark" href="https://wa.me/971502467038" target="_blank">WhatsApp</a>
 </div>
