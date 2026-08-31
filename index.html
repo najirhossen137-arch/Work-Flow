@@ -80,6 +80,26 @@ async function requireSignupForApply(job){
   location.href='login.html?next='+encodeURIComponent(next);
 }
 </script>
+<style>
+/* WORK FLOW PREMIUM HOMEPAGE v2 */
+:root{--wf-navy:#071a33;--wf-navy2:#0b2c50;--wf-teal:#12b8c8;--wf-cyan:#24d1df;--wf-ink:#0d1f35;--wf-muted:#66778d;--wf-bg:#f4f8fb;--wf-card:#fff;--wf-line:#e3ebf2;--wf-shadow:0 18px 50px rgba(7,26,51,.10)}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--wf-bg);color:var(--wf-ink)}
+.top{background:#06172d;padding:10px clamp(18px,5vw,72px);font-size:12px;letter-spacing:.1px;border-bottom:1px solid rgba(255,255,255,.08)}
+nav{height:82px;padding:0 clamp(18px,5vw,72px);border-bottom:1px solid #e8eef3;box-shadow:0 8px 28px rgba(7,26,51,.06);backdrop-filter:blur(12px)}
+.brand{gap:10px}.brand img{width:54px;height:54px}.brand b{font-size:23px;letter-spacing:-.4px}.brand-copy small{color:#728298;font-weight:700;font-size:9px;letter-spacing:.8px}
+.links{gap:22px;color:#3a4b61;font-size:13px}.links a{position:relative;padding:28px 0}.links a:after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:2px;background:var(--wf-teal);transition:.2s}.links a:hover:after{right:0}
+.auth-nav{gap:8px}.auth-nav .btn{min-height:42px;padding:11px 15px;border-radius:10px}.auth-user{background:#edf8fa;padding:10px 12px;border-radius:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hero{min-height:620px;padding:80px clamp(18px,5vw,72px);background:linear-gradient(90deg,rgba(3,19,39,.96) 0%,rgba(5,29,54,.84) 42%,rgba(5,29,54,.30) 100%),url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=90') center/cover;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:auto -10% -130px auto;width:55%;height:260px;background:radial-gradient(ellipse,rgba(18,184,200,.22),transparent 65%);pointer-events:none}.hero-inner{max-width:760px;position:relative;z-index:1}.eyebrow{font-size:14px;letter-spacing:2.4px;color:var(--wf-cyan);font-weight:900}.hero h1{font-size:clamp(46px,6vw,78px);font-weight:900;letter-spacing:-2.5px;line-height:.96;margin:18px 0 20px}.hero h1 span{color:var(--wf-cyan)}.hero p{font-size:18px;line-height:1.7;color:#e1ebf5;max-width:650px}.actions{gap:12px}.btn{border-radius:10px;padding:14px 20px;box-shadow:0 8px 22px rgba(7,26,51,.12);transition:transform .18s,box-shadow .18s}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(7,26,51,.18)}.btn.outline{box-shadow:none}.stats{margin-top:48px;border-radius:16px;background:rgba(5,29,54,.82);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.13);box-shadow:0 18px 45px rgba(0,0,0,.18)}.stat{padding:20px 25px;min-width:165px}.stat strong{font-size:28px}.stat small{font-size:12px}
+.section{max-width:1280px;padding:78px clamp(18px,5vw,72px)}.section h2{font-size:34px;letter-spacing:-1px}.sub{font-size:15px;line-height:1.7}.features{border:1px solid var(--wf-line);border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(7,26,51,.04)}.feature{padding:30px 20px;transition:.2s}.feature:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(7,26,51,.10);position:relative;z-index:1}.feature h3{font-size:16px}.feature p{color:var(--wf-muted);font-size:13px}.icon{font-size:31px}
+.jobs-wrap{gap:28px}.jobs{gap:14px}.job{padding:23px;border-radius:15px;box-shadow:0 6px 22px rgba(7,26,51,.04);transition:.2s}.job:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(7,26,51,.09)}.job h3{font-size:17px}.side{border-radius:18px;box-shadow:0 18px 45px rgba(7,26,51,.16)}
+.about{border:1px solid var(--wf-line);box-shadow:var(--wf-shadow);border-radius:20px}.about h2{font-size:38px}.card{border:1px solid var(--wf-line);box-shadow:none;border-radius:15px}
+.contact{background:linear-gradient(135deg,#06172d,#0d3d68);padding:75px 5%}.contact h2{font-size:42px}.footer{padding:55px 5% 22px}.footer-grid{gap:48px}.footer a{transition:.2s}.footer a:hover{color:var(--wf-cyan)}
+.wa{width:60px;height:60px;right:22px;bottom:22px;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+@media(max-width:900px){nav{height:70px}.links{display:none}.hero{min-height:650px;padding-top:62px;padding-bottom:62px}.hero h1{letter-spacing:-1.7px}.section{padding-top:58px;padding-bottom:58px}.features{grid-template-columns:repeat(2,1fr)}.jobs-wrap{grid-template-columns:1fr}.about{padding:28px}.auth-user{max-width:125px}}
+@media(max-width:520px){.top{padding:8px 12px}.brand img{width:42px;height:42px}.brand b{font-size:18px}.auth-nav .btn{padding:9px 10px;min-height:38px;font-size:11px}.auth-user{display:none!important}.hero{min-height:680px;padding:55px 18px}.hero h1{font-size:49px;line-height:.94}.hero p{font-size:16px;line-height:1.65}.actions .btn{width:100%}.stats{margin-top:34px}.stat{min-width:0;padding:16px 14px}.stat strong{font-size:23px}.section{padding-left:18px;padding-right:18px}.features{grid-template-columns:1fr}.about{padding:24px}.about h2{font-size:30px}.contact h2{font-size:32px}.wa{width:56px;height:56px;right:16px;bottom:16px}}
+</style>
+
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
