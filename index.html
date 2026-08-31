@@ -151,4 +151,14 @@ nav{height:66px;padding:0 10px}.brand img{width:40px;height:40px}.brand b{font-s
 
 
 
-</body></html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.setupReviewForm) {
+    window.setupReviewForm(document.getElementById("reviewForm"));
+  }
+
+  if (window.loadApprovedReviews) {
+    window.loadApprovedReviews("#reviewList");
+  }
+});
+</script></body></html>
