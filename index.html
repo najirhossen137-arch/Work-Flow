@@ -261,6 +261,12 @@ body>*{max-width:none}
   nav .wf-mobile-menu{top:146px !important;left:10px !important;right:10px !important;}
 }
 </style>
+<style id="wf-v8-menu-final">
+@media (max-width:900px){
+  #wfMobileMenu{display:none !important;}
+  #wfMobileMenu.open{display:flex !important; flex-direction:column !important;}
+}
+</style>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
@@ -366,6 +372,7 @@ body>*{max-width:none}
 (function(){
  const t=document.getElementById('wfMenuToggle'),m=document.getElementById('wfMobileMenu'),c=document.getElementById('wfMenuClose');
  if(!t||!m)return;
+ m.classList.remove('open'); t.setAttribute('aria-expanded','false');
  function close(){m.classList.remove('open');t.setAttribute('aria-expanded','false')}
  t.addEventListener('click',()=>{const on=m.classList.toggle('open');t.setAttribute('aria-expanded',String(on))});
  c&&c.addEventListener('click',close);
