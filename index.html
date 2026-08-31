@@ -202,6 +202,65 @@ body>*{max-width:none}
   nav .wf-mobile-menu{top:80px!important;left:8px!important;right:8px!important;}
 }
 </style>
+<style id="wf-v7-menu-fix">
+/* V7: bulletproof mobile navigation */
+@media (max-width:900px){
+  nav .wf-mobile-menu{
+    display:none !important;
+    position:fixed !important;
+    top:148px !important;
+    left:12px !important;
+    right:12px !important;
+    width:auto !important;
+    max-width:none !important;
+    height:auto !important;
+    max-height:calc(100vh - 165px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    box-sizing:border-box !important;
+    flex-direction:column !important;
+    flex-wrap:nowrap !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+    gap:2px !important;
+    padding:10px !important;
+    background:#fff !important;
+    border:1px solid #dce6ee !important;
+    border-radius:18px !important;
+    box-shadow:0 24px 70px rgba(7,26,51,.22) !important;
+    z-index:9999 !important;
+  }
+  nav .wf-mobile-menu.open{
+    display:flex !important;
+  }
+  nav .wf-mobile-menu .wf-mobile-menu-head{
+    display:flex !important;
+    width:100% !important;
+    flex:0 0 auto !important;
+    box-sizing:border-box !important;
+  }
+  nav .wf-mobile-menu a{
+    display:flex !important;
+    width:100% !important;
+    min-width:0 !important;
+    flex:0 0 auto !important;
+    box-sizing:border-box !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    padding:13px 14px !important;
+    min-height:46px !important;
+    font-size:15px !important;
+    border-radius:10px !important;
+  }
+  nav .wf-mobile-menu-head strong{font-size:18px !important;}
+  nav .wf-mobile-menu-head button{flex:0 0 38px !important;}
+}
+@media (max-width:600px){
+  nav .wf-mobile-menu{top:146px !important;left:10px !important;right:10px !important;}
+}
+</style>
 </head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
