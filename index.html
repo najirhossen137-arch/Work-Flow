@@ -167,7 +167,7 @@ body>*{max-width:none}
   body{overflow-x:hidden;}
   nav{position:sticky;top:0;z-index:100;height:72px!important;padding:0 14px!important;display:flex!important;align-items:center!important;}
   nav .brand{flex:1 1 auto!important;min-width:0!important;max-width:none!important;overflow:visible!important;}
-  nav .brand img{width:44px!important;height:44px!important;object-fit:contain!important;flex:0 0 44px!important;}
+  nav .brand img{width:44px!important;height:44px!important;object-fit:cover!important;flex:0 0 44px!important;}
   nav .brand b{font-size:20px!important;white-space:nowrap!important;}
   nav .brand-copy{min-width:0!important;overflow:visible!important;}
   nav .brand-copy small{display:none!important;}
@@ -284,7 +284,20 @@ nav,.nav{background:rgba(255,255,255,.96)!important;backdrop-filter:blur(14px);b
 /* dashboard / profile cards */
 main .card.section{border-radius:22px!important}.notice,.msg{border-radius:12px!important;border:1px solid #d9e8ef!important;background:#eef9fb!important}.application{border:1px solid #e2e9f0!important;border-radius:14px!important;padding:14px!important;margin:10px 0!important;background:#fff!important}
 @media(max-width:700px){.hero h1{font-size:clamp(40px,11vw,58px)!important}.hero{min-height:620px!important}.section{padding:52px 18px!important}.hero-mini{padding:40px 22px!important}.card.section{padding:22px!important}.brand{max-width:none}}
-</style></head>
+</style>
+<style id="wf-v11-premium">
+:root{--navy:#03152b;--blue:#07294b;--teal:#12d7e6;--ink:#081a32;--muted:#64748b;--bg:#f3f8fc}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#f7fbff 0%,#eef5fa 100%)}
+.top{background:linear-gradient(90deg,#02182f,#063454);padding:8px 4%;font-size:12px}
+nav{height:76px;padding:0 4%;box-shadow:0 8px 25px rgba(3,21,43,.08);border-bottom:1px solid #e5edf4}
+.brand b{font-size:22px}.brand-copy small{color:#718096}
+.links{gap:20px}.links a{transition:.2s}.links a:hover{color:var(--teal);transform:translateY(-1px)}
+.hero{min-height:590px;padding:65px 4%;background:linear-gradient(90deg,rgba(2,17,35,.98) 0%,rgba(3,30,55,.90) 45%,rgba(3,30,55,.18) 100%),url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=90') center/cover;border-radius:0 0 34px 34px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-160px;top:-140px;width:500px;height:500px;border:1px solid rgba(18,215,230,.22);border-radius:50%;box-shadow:0 0 100px rgba(18,215,230,.12) inset}.hero-inner{position:relative;z-index:2}.eyebrow{display:inline-block;border:1px solid rgba(18,215,230,.5);padding:7px 14px;border-radius:30px;background:rgba(18,215,230,.08);font-size:13px}.hero h1{font-size:clamp(48px,6.5vw,82px);letter-spacing:-2px;text-transform:uppercase}.hero h1 span{color:#18d7e7;text-shadow:0 0 24px rgba(18,215,231,.18)}.hero p{font-size:18px;line-height:1.65}.btn{border-radius:12px;padding:14px 22px;box-shadow:0 10px 25px rgba(18,215,230,.12)}.btn.dark{background:#061a33}.btn.outline{border-color:rgba(255,255,255,.45)}.stats{border:1px solid rgba(18,215,230,.3);background:rgba(2,20,39,.72);backdrop-filter:blur(10px);border-radius:16px}.stat strong{color:#16d8e8}.section{padding:70px 4%;max-width:1320px}.features{background:transparent;gap:12px}.feature{border:1px solid #e1eaf2;border-radius:18px;padding:28px 16px;box-shadow:0 12px 30px rgba(8,26,50,.06);transition:.2s}.feature:hover{transform:translateY(-5px);box-shadow:0 18px 35px rgba(8,26,50,.1)}.feature .icon{background:#e9fbfd;border-radius:14px;width:52px;height:52px;display:grid;place-items:center;margin:0 auto 12px}.jobs-wrap{gap:28px}.job{border-radius:16px;padding:22px;border:1px solid #e0e9f1;box-shadow:0 8px 24px rgba(8,26,50,.05)}.job:hover{border-color:#a9eaf0;box-shadow:0 12px 30px rgba(8,26,50,.08)}.side{border-radius:24px;background:linear-gradient(150deg,#04172e,#063f62);box-shadow:0 18px 40px rgba(2,23,43,.18);border:1px solid rgba(18,215,230,.2)}.contact{background:linear-gradient(135deg,#03152b,#063a5a)}.footer{background:#021124}
+.wa{background:#19c96b;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+@media(max-width:900px){.hero{min-height:560px;padding:55px 20px;border-radius:0 0 26px 26px}.hero h1{font-size:46px;letter-spacing:-1px}.hero p{font-size:16px}.section{padding:52px 20px}.feature{padding:22px 12px}.job{padding:18px}.side{padding:26px}}
+</style>
+</head>
 <body>
 <div class="top"><span>🇦🇪 UAE's Trusted Recruitment & Business Services</span><span>workflow2451@gmail.com</span></div>
 <nav>

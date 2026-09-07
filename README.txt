@@ -12,3 +12,6 @@ WORK FLOW PROFESSIONAL RECRUITMENT PORTAL
 7. Applications and CV storage are protected by RLS/storage policies. Never put a Supabase service_role key in frontend code.
 
 8. Reviews: work_flow_portal.sql now creates the reviews table and index.html initializes review loading/submission.
+
+
+V11 DESIGN UPDATE: Premium UAE recruitment redesign with dark navy/teal hero, modern cards, responsive layout, and design-preview.png. Existing Supabase/auth/CV/job/review functionality is retained.
