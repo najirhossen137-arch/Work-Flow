@@ -8,3 +8,5 @@ WORK FLOW PROFESSIONAL RECRUITMENT PORTAL
 5. Candidate flow: Login -> Jobs -> Job Details -> Apply -> Candidate details + CV -> Application ID -> Dashboard.
 6. Employer flow: Employer Dashboard -> Company -> Post Job -> Applicants -> Status -> Candidate notification.
 7. Applications and CV storage are protected by RLS/storage policies. Never put a Supabase service_role key in frontend code.
+
+8. Reviews: work_flow_portal.sql now creates the reviews table and index.html initializes review loading/submission.

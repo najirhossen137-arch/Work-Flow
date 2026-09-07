@@ -38,3 +38,23 @@ drop trigger if exists protect_profile_role_trigger on public.profiles; create t
 drop policy if exists notif_employer_insert on public.notifications; create policy notif_employer_insert on public.notifications for insert to authenticated with check(public.is_role('admin') or exists(select 1 from public.applications a join public.jobs j on j.id=a.job_id where a.user_id=notifications.user_id and j.employer_id=auth.uid()));
 -- Tighten CV reads: candidates can read their own CV; employers can read only CVs attached to applications for their jobs; admins can read all.
 drop policy if exists cv_read_own on storage.objects; create policy cv_read_own on storage.objects for select to authenticated using(bucket_id='cv' and ((storage.foldername(name))[1]=auth.uid()::text or public.is_role('admin') or exists(select 1 from public.applications a join public.jobs j on j.id=a.job_id where a.cv_path=name and j.employer_id=auth.uid())));
+
+-- Reviews table used by the public review section
+create table if not exists public.reviews(
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  "nameName" text not null,
+  location text,
+  rating integer not null check(rating between 1 and 5),
+  review text not null,
+  status text not null default 'pending' check(status in ('pending','approved','rejected'))
+);
+alter table public.reviews enable row level security;
+drop policy if exists public_insert_reviews on public.reviews;
+create policy public_insert_reviews on public.reviews for insert to anon, authenticated with check(status='pending');
+drop policy if exists public_read_reviews on public.reviews;
+create policy public_read_reviews on public.reviews for select to anon, authenticated using(status='approved');
+drop policy if exists authenticated_manage_reviews on public.reviews;
+create policy authenticated_manage_reviews on public.reviews for select to authenticated using(true);
+drop policy if exists authenticated_update_reviews on public.reviews;
+create policy authenticated_update_reviews on public.reviews for update to authenticated using(true) with check(status in ('approved','rejected','pending'));

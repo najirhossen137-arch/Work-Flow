@@ -369,6 +369,12 @@ body>*{max-width:none}
 
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.loadApprovedReviews) window.loadApprovedReviews('#reviewList');
+  if (window.setupReviewForm) window.setupReviewForm(document.getElementById('reviewForm'));
+});
+</script>
+<script>
 (function(){
  const t=document.getElementById('wfMenuToggle'),m=document.getElementById('wfMobileMenu'),c=document.getElementById('wfMenuClose');
  if(!t||!m)return;
