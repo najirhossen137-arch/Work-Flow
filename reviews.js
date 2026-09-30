@@ -4,15 +4,23 @@
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
   }[c]));
 
-  function client() {
-    if (typeof getSupabase === "function") return getSupabase();
-    if (window.supabaseClient) return window.supabaseClient;
-    if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
-      window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-      return window.supabaseClient;
+ // Supabase client ko seedha yahan initialize karein
+let supabaseClientInstance = null;
+
+function client() {
+    if (supabaseClientInstance) return supabaseClientInstance;
+
+    const supabaseUrl = "https://uvhzxmqsaictnmkbsdly.supabase.co";
+    const supabaseKey = "sb_publishable_eBLkuPKORDJMfDZS1rACQ_gsJACa8X";
+    
+    // Supabase library ko dynamically load karein
+    if (typeof window.supabase === 'undefined') {
+        throw new Error("Supabase library load nahi hui. Please check your HTML.");
     }
-    throw new Error("Supabase client is not configured.");
-  }
+    
+    supabaseClientInstance = window.supabase.createClient(supabaseUrl, supabaseKey);
+    return supabaseClientInstance;
+}
 
   async function fetchApprovedReviews() {
     const sb = client();
