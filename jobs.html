@@ -34,6 +34,29 @@ main .card.section{border-radius:22px!important}.notice,.msg{border-radius:12px!
       // Agar aapko user chahiye toh aise nikaalein:
       const { data: { user: u } } = await sb.auth.getUser();
 
-      // ... aapka baaki ka code (jobs fetch karna, filter karna, render karna)
+      // ...// 4. Jobs fetch karne ka code
+const { data: jobs, error } = await sb.from('jobs').select('*');
+
+if (error) {
+    console.error("Error fetching jobs:", error);
+    document.getElementById('jobs-container').innerHTML = "<p>Jobs load nahi ho sakti.</p>";
+} else {
+    const container = document.getElementById('jobs-container');
+    
+    if (jobs && jobs.length > 0) {
+        container.innerHTML = jobs.map(job => `
+            <div class="job-card" style="border:1px solid #ddd; padding:15px; margin:10px 0; border-radius:12px;">
+                <h3>${job.title || 'Job Title'}</h3>
+                <p><strong>Company:</strong> ${job.company || 'N/A'}</p>
+                <p><strong>Location:</strong> ${job.location || 'N/A'}</p>
+                <p><strong>Salary:</strong> ${job.salary || 'N/A'}</p>
+                <button class="btn apply-btn" onclick="applyForJob('${job.id}')">Apply Now</button>
+            </div>
+        `).join('');
+    } else {
+        container.innerHTML = "<p>Koi jobs available nahi hain.</p>";
+    }
+} 
   })();
-</script>
+</script>window.applyForJob = async (jobId) => {
+    alert("Aapne is job ke liye apply kiya! Job ID: " + jobId);
